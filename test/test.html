@@ -1,0 +1,31 @@
+<script type="text/javascript">
+
+  function PLKit() {
+    var socket = new WebSocket("ws://localhost:5000/");
+    socket.onopen = (event) => {
+      console.log("open");
+    };
+
+    function _send(key, v) {
+      v = v || true;
+      let o = {
+        key: key,
+        value: v,
+      };
+      socket.send(JSON.stringify(o));
+    }
+
+    this.sendInt = _send;
+    this.sendFloat = _send;
+    this.sendBang = _send;
+  }
+
+  let plk = new PLKit();
+  
+  document.onkeypress = (e) => {
+    if (e.key == 'a') plk.sendInt("i", 2);
+    else if (e.key == 's') plk.sendFloat('f', 3.14);
+    else if (e.key == 'd') plk.sendBang('bb');
+  };
+
+</script>
