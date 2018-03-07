@@ -39,6 +39,7 @@ class Connection:
             pass
         else:
             Connection._serial = serial
+            serial.timeout = 0.5
             self.serial = serial
 
     @staticmethod
@@ -90,7 +91,7 @@ class Connection:
     def _process_incoming(self, data):
         data = re.sub(r'\r|\n', '', data)
         match = re.match(r'\|(\w+),(b|i|f),([\w\.]*)\|', data)
-        
+        # print(data)
         if match:
             key, t, d = match.groups()
 
@@ -103,10 +104,12 @@ class Connection:
 
             if t != 'b':
                 o['value'] = d
+            else:
+                o['value'] = True
 
             for _, ws in self.wss.items():
                 ws.send(o)
-                print('sending', o)
+                print('sending:', o['key'], o['value'])
 
             _, end = match.span()
             return self._process_incoming(data[end:])
