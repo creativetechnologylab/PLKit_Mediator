@@ -1,0 +1,14 @@
+<input type="range" min="0" max="255" value="50" id="slider">
+
+<script src="../js/plkit.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+
+  let plk = new PLKit();
+
+  var slider = document.querySelector("#slider");
+  slider.oninput = function() {
+    plk.send("brightness", this.value);
+  };
+
+</script>

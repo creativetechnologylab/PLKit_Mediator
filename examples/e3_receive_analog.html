@@ -1,0 +1,16 @@
+<span id="pot">pot</span>
+
+<script src="../js/plkit.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+
+  let plk = new PLKit();
+
+  function changePotReading(value) {
+    document.querySelector("#pot").innerHTML = value;
+  }
+
+  plk.receive("pot", changePotReading);
+
+
+</script>
