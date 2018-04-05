@@ -22,3 +22,6 @@ $ python mediator.py
 
 This will then open a serial port, trying to connect to an Arduino and wait for a browswer to connect.
 
+### Browser
+
+Use the code in `js/plkit.js` to communicate with the Arduino
